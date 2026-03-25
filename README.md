@@ -48,3 +48,19 @@ ROI-Compass-and-Campaign-Tracker-/
 - **`localStorage`** provides a lightweight, client‑side persistence layer without requiring a backend – perfect for a prototype.
 - **CSS custom properties** enable a maintainable theming system that can be extended easily.
 - **Modular JavaScript** separates concerns (calculations, storage, UI) for cleaner code and easier testing.
+
+
+## 📊 PDF Report Example
+When you click the **Generate Professional Report** button after calculating a campaign, you get a clean, branded document that includes:
+- Campaign inputs (Budget, Clicks, Conversion Rate)
+- Key metrics (CPC, CPL, Leads)
+- Lead quality assessment (color‑coded)
+- Timestamp and logo placeholder
+
+This report is ready to be shared with clients or stakeholders.
+
+## 🤝 Contributing
+This project is a prototype; contributions are welcome. Please open an issue or pull request for any improvements.
+
+## 📝 License
+MIT © ROI Compass
