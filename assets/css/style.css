@@ -12,6 +12,10 @@
   --danger-hover: #dc2626;
   --warning: #f59e0b;
   --success: #10b981;
+  /* SEO specific colors to mimic search engines */
+  --seo-link: #1a0dab;
+  --seo-url: #202124;
+  --seo-text: #4d5156;
 }
 
 body.dark {
@@ -21,6 +25,9 @@ body.dark {
   --text-secondary: #cbd5e1;
   --border: #334155;
   --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  --seo-link: #8ab4f8;
+  --seo-url: #9aa0a6;
+  --seo-text: #bdc1c6;
 }
 
 /* 2. Global Reset & Base Styles */
@@ -35,6 +42,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s, color 0.3s;
+  line-height: 1.5;
 }
 
 /* 3. Layout */
@@ -64,10 +72,13 @@ body {
 /* 4. Sidebar Elements */
 .logo {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 2rem;
   padding-left: 0.5rem;
   color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 nav ul {
@@ -84,6 +95,7 @@ nav a {
   border-radius: 0.5rem;
   text-decoration: none;
   color: var(--text-secondary);
+  font-weight: 500;
   transition: all 0.2s;
 }
 
@@ -101,12 +113,13 @@ nav a.active {
   margin-bottom: 2rem;
 }
 
-.metric-card, .form-card, .table-wrapper {
+.metric-card, .form-card, .table-wrapper, .seo-preview-card {
   background-color: var(--bg-secondary);
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: var(--card-shadow);
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  border: 1px solid var(--border);
 }
 
 .metric-card {
@@ -114,27 +127,30 @@ nav a.active {
 }
 
 .metric-card h3 {
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 600;
   color: var(--text-secondary);
   margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
 }
 
 .metric-value {
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 700;
   color: var(--text-primary);
 }
 
 /* 6. Forms & Inputs */
 .input-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .input-group label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 600;
   color: var(--text-primary);
 }
 
@@ -145,17 +161,20 @@ input, textarea {
   border-radius: 0.5rem;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  transition: border-color 0.2s, background-color 0.2s;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-input:focus {
+input:focus, textarea:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 input.error {
   border-color: var(--danger);
-  background-color: rgba(239, 68, 68, 0.1);
+  background-color: rgba(239, 68, 68, 0.05);
 }
 
 /* 7. Buttons */
@@ -166,6 +185,10 @@ button {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .primary-btn {
@@ -176,6 +199,7 @@ button {
 
 .primary-btn:hover {
   background-color: var(--accent-hover);
+  transform: translateY(-1px);
 }
 
 .secondary-btn {
@@ -190,6 +214,19 @@ button {
   background-color: var(--border);
 }
 
+.tertiary-btn {
+  background-color: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.tertiary-btn:hover {
+  background-color: var(--bg-primary);
+  border-color: var(--accent);
+}
+
 .danger-btn, .delete-campaign {
   background-color: var(--danger);
   color: white;
@@ -202,7 +239,7 @@ button {
 /* 8. Data Table */
 .table-wrapper {
   overflow-x: auto;
-  padding: 0; /* Let table fill container */
+  padding: 0;
 }
 
 table {
@@ -218,11 +255,55 @@ th, td {
 
 th {
   background-color: var(--bg-primary);
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--text-secondary);
 }
 
-/* 9. Theme Toggle (At bottom of sidebar) */
+td {
+  font-size: 0.875rem;
+}
+
+/* 9. SEO Preview Tool */
+.seo-preview-card {
+  margin-top: 2rem;
+}
+
+.seo-snippet {
+  margin-top: 1rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background-color: var(--bg-primary);
+}
+
+.snippet-title {
+  font-size: 1.25rem;
+  color: var(--seo-link);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.25rem;
+  font-family: Arial, sans-serif; /* Mimic Google */
+}
+
+.snippet-url {
+  font-size: 0.875rem;
+  color: var(--seo-url);
+  margin-bottom: 0.25rem;
+  display: block;
+  font-family: Arial, sans-serif;
+}
+
+.snippet-desc {
+  font-size: 0.875rem;
+  color: var(--seo-text);
+  line-height: 1.5;
+  font-family: Arial, sans-serif;
+}
+
+/* 10. Theme Toggle */
 .theme-toggle {
   margin-top: auto;
   padding: 1rem 0;
@@ -232,13 +313,139 @@ th {
   background: none;
   border: 1px solid var(--border);
   border-radius: 2rem;
-  padding: 0.5rem 1rem;
+  padding: 0.625rem 1rem;
   cursor: pointer;
   width: 100%;
   color: var(--text-primary);
+  font-weight: 500;
   transition: all 0.2s;
 }
 
 #darkModeToggle:hover {
   background-color: var(--border);
+}
+
+/* 11. Uniform Professional Report Styles (Clean & Print-Ready) */
+.professional-report {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  width: 210mm; /* A4 Width */
+  min-height: 297mm;
+  padding: 40px;
+  background: #ffffff;
+  color: #0f172a;
+  font-family: 'Inter', sans-serif;
+}
+
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+  border-bottom: 2px solid #3b82f6;
+  padding-bottom: 1.5rem;
+}
+
+.report-header .logo-group .logo {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #3b82f6;
+  margin-bottom: 0.25rem;
+}
+
+.report-header .report-info {
+  text-align: right;
+}
+
+.report-header .report-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.report-header .report-date {
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.report-section {
+  margin-bottom: 2.5rem;
+}
+
+.report-section h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #3b82f6;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.report-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 1rem;
+}
+
+.report-table td:first-child {
+  color: #64748b;
+  font-weight: 500;
+  width: 60%;
+}
+
+.report-table td:last-child {
+  text-align: right;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.report-quality-badge {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+  font-size: 1rem;
+  border: 1px solid transparent;
+}
+
+.report-quality-badge.quality-good {
+  background-color: #f0fdf4;
+  color: #166534;
+  border-color: #bbf7d0;
+}
+
+.report-quality-badge.quality-warning {
+  background-color: #fefce8;
+  color: #854d0e;
+  border-color: #fef08a;
+}
+
+.report-quality-badge.quality-poor {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border-color: #fecaca;
+}
+
+.report-footer {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  right: 40px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1.5rem;
 }

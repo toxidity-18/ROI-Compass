@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ROI Compass | Dashboard</title>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -25,8 +29,11 @@
       </div>
     </aside>
 
-    <main class="main-content">
-      <h1>ROI Dashboard</h1>
+    <main class="main-content" id="dashboardReport">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h1>ROI Dashboard</h1>
+        <button id="reportBtn" class="primary-btn">📊 Generate Professional Report</button>
+      </div>
       
       <div class="metrics-grid">
         <div class="metric-card" id="cardCPC">
@@ -59,6 +66,24 @@
         </div>
         <button id="calculateBtn" class="primary-btn">Calculate ROI</button>
         <button id="saveCampaignBtn" class="secondary-btn">💾 Save Campaign</button>
+      </div>
+
+      <div class="form-card" style="margin-top: 2rem;">
+        <h2>SEO Preview Tool</h2>
+        <div class="input-group">
+          <label for="seoTitle">SEO Title</label>
+          <input type="text" id="seoTitle" placeholder="Campaign Title (max 60 chars)" maxlength="60">
+        </div>
+        <div class="input-group">
+          <label for="seoDesc">Meta Description</label>
+          <textarea id="seoDesc" rows="2" placeholder="Describe your campaign (max 160 chars)" maxlength="160"></textarea>
+        </div>
+        
+        <div class="seo-snippet">
+          <div class="snippet-title" id="snippetTitle">Your SEO Title</div>
+          <div class="snippet-url">https://roicompass.com/</div>
+          <div class="snippet-desc" id="snippetDesc">Your meta description will appear here.</div>
+        </div>
       </div>
     </main>
   </div>
